@@ -87,6 +87,19 @@
           <li><a class="nav-link scrollto" href="#services">الرعاة</a></li>
           <li><a class="nav-link scrollto" href="#testimonials">العضويات</a></li>
           <li><a class="nav-link scrollto" href="#contact">تواصل معنا</a></li>
+          <li><a class="nav-link scrollto" href="auth.html?form=login">تسجيل الدخول</a></li>
+          <li><a class="nav-link scrollto" href="auth.html?form=register">إنشاء حساب</a></li>
+
+          <li id="userMenu" style="display: none;">
+            <div class="user-profile">
+                <i class="fas fa-user user-icon"></i>
+                <span id="userName"></span>
+                <button onclick="logout()" class="logout-btn">
+                    <i class="fas fa-sign-out-alt"></i>
+                    <span data-translate="logout">تسجيل الخروج</span>
+                </button>
+            </div>
+          </li>
           <li><a href="index.html"><i class="bi bi-globe"></i>EN </a></li>
         </ul>
         <i class="bi bi-list mobile-nav-toggle"></i>
@@ -683,5 +696,117 @@
   <script src="assets/js/main.js"></script>
 
 </body>
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+      checkLoginStatus();
+  });
+
+  function checkLoginStatus() {
+      try {
+          // Get elements
+          const guestLinks = document.getElementById('guestLinks');
+          const userMenu = document.getElementById('userMenu');
+          const userNameElement = document.getElementById('userName');
+          const loginBtn = document.querySelector('a[href="auth.html?form=login"]');
+          const registerBtn = document.querySelector('a[href="auth.html?form=register"]');
+
+          // Check if user is logged in
+          const isLoggedIn = localStorage.getItem('isLoggedIn') === 'true';
+          const userName = localStorage.getItem('loggedInUser');
+
+          console.log('Login status:', isLoggedIn);
+          console.log('Username:', userName);
+
+          if (isLoggedIn && userName) {
+              // User is logged in
+              console.log('User is logged in, showing user menu');
+              
+              // Hide login/register buttons
+              if (loginBtn) loginBtn.style.display = 'none';
+              if (registerBtn) registerBtn.style.display = 'none';
+              if (guestLinks) guestLinks.style.display = 'none';
+
+              // Show user menu with logout
+              if (userMenu) {
+                  userMenu.style.display = 'flex';
+                  if (userNameElement) {
+                      userNameElement.textContent = userName;
+                  }
+              }
+          } else {
+              // User is not logged in
+              console.log('User is not logged in, showing guest menu');
+              showGuestMenu();
+          }
+      } catch (error) {
+          console.log('Error in checkLoginStatus:', error.message);
+          showGuestMenu();
+      }
+  }
+
+  function showGuestMenu() {
+      const guestLinks = document.getElementById('guestLinks');
+      const userMenu = document.getElementById('userMenu');
+      const loginBtn = document.querySelector('a[href="auth.html?form=login"]');
+      const registerBtn = document.querySelector('a[href="auth.html?form=register"]');
+
+      // Show login/register buttons
+      if (loginBtn) loginBtn.style.display = 'inline-block';
+      if (registerBtn) registerBtn.style.display = 'inline-block';
+      if (guestLinks) guestLinks.style.display = 'flex';
+
+      // Hide user menu
+      if (userMenu) userMenu.style.display = 'none';
+  }
+
+  function logout() {
+      console.log('Logging out...');
+      // Clear all login-related data
+      localStorage.removeItem('isLoggedIn');
+      localStorage.removeItem('loggedInUser');
+      localStorage.removeItem('currentUser');
+      
+      // Reload page to update UI
+      window.location.reload();
+  }
+
+  // Language handling
+  const translations = {
+      ar: {
+          logout: "تسجيل الخروج",
+          welcome: "مرحباً",
+          joinUs: "انضم إلينا"
+      },
+      en: {
+          logout: "Logout",
+          welcome: "Welcome",
+          joinUs: "Join Us"
+      }
+  };
+
+  function setupLanguage() {
+      const lang = localStorage.getItem("selectedLanguage") || "ar";
+      document.documentElement.setAttribute("dir", lang === "ar" ? "rtl" : "ltr");
+      document.documentElement.setAttribute("lang", lang);
+
+      // Set up language switcher
+      const languageSwitcher = document.getElementById("languageSwitcher");
+      if (languageSwitcher) {
+          languageSwitcher.value = lang;
+          languageSwitcher.addEventListener("change", function() {
+              localStorage.setItem("selectedLanguage", this.value);
+              window.location.reload();
+          });
+      }
+
+      // Update translations
+      document.querySelectorAll('[data-translate]').forEach(element => {
+          const key = element.getAttribute('data-translate');
+          if (translations[lang][key]) {
+              element.textContent = translations[lang][key];
+          }
+      });
+  }
+</script>
 
 </html>
