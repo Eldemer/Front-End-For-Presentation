@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title data-translate="pageTitle">Login & Register</title>
+    <link href="assets/css/style.css" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@300;400;500;600;700&family=Noto+Kufi+Arabic:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <style>
+        /* Success Popup Styles */
+        .success-popup {
+            position: fixed;
+            left: 20px;
+            bottom: 20px;
+            background-color: #28a745;
+            color: white;
+            padding: 15px 20px;
+            border-radius: 5px;
+            font-size: 16px;
+            font-weight: bold;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            display: none;
+            z-index: 1000;
+        }
+        
+        .success-popup.show {
+            display: block;
+            animation: fadeIn 0.5s ease-in-out, fadeOut 3s 2s forwards;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateX(-50px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+
+        @keyframes fadeOut {
+            from { opacity: 1; }
+            to { opacity: 0; }
+        }
+    </style>
+</head>
+<body>
+
+<!-- Language Switcher -->
+<div class="language-switcher">
+    <select id="languageSwitcher" class="form-select">
+        <option value="ar">العربية</option>
+        <option value="en">English</option>
+    </select>
+</div>
+
+<!-- Success Popup -->
+<div id="success-message" class="success-popup"></div>
+
+<section class="auth-area">
+    <div class="container">
+        <div class="form-wrapper">
+            <!-- Tabs for Login/Register -->
+            <div class="form-header">
+                <button id="login-tab" class="auth-tab active" onclick="showForm('login')">
+                    <img src="https://cdn-icons-png.flaticon.com/512/747/747376.png" width="20" alt="Login Icon">
+                    <span data-translate="login">Login</span>
+                </button>
+                <button id="register-tab" class="auth-tab" onclick="showForm('register')">
+                    <img src="https://cdn-icons-png.flaticon.com/512/1000/1000997.png" width="20" alt="Register Icon">
+                    <span data-translate="register">Register</span>
+                </button>
+            </div>
+  
+            <!-- Login Form -->
+            <form id="login-form" class="auth-form active" onsubmit="return handleLogin(event)">
+                <h2 data-translate="welcomeBack">Welcome Back</h2>
+                <div class="form-group">
+                    <input type="text" id="login-username" data-translate-placeholder="username" required>
+                </div>
+                <div class="form-group">
+                    <input type="password" id="login-password" data-translate-placeholder="password" required>
+                </div>
+                <button type="submit" class="btn-theme" data-translate="signIn">Login</button>
+                <p class="toggle-link">
+                    <span data-translate="noAccount">Don't have an account?</span>
+                    <a href="#" onclick="showForm('register')" data-translate="signUp">Sign Up</a>
+                </p>
+            </form>
+  
+            <!-- Registration Form -->
+            <form id="register-form" class="auth-form" onsubmit="return handleRegister(event)">
+                <h2 data-translate="createAccount">Create an Account</h2>
+                <div class="form-group">
+                    <input type="text" id="register-username" data-translate-placeholder="fullName" required>
+                </div>
+                <div class="form-group">
+                    <input type="tel" id="register-phone" data-translate-placeholder="phone" required>
+                </div>
+                <div class="form-group">
+                    <input type="email" id="register-email" data-translate-placeholder="email" required>
+                </div>
+                <div class="form-group">
+                    <input type="password" id="register-password" data-translate-placeholder="password" required>
+                    <div class="password-strength"></div>
+                </div>
+                <button type="submit" class="btn-theme" data-translate="register">Register</button>
+                <p class="toggle-link">
+                    <span data-translate="haveAccount">Already have an account?</span>
+                    <a href="#" onclick="showForm('login')" data-translate="signIn">Sign In</a>
+                </p>
+            </form>
+        </div>
+    </div>
+</section>
+
+<!-- Scripts Section -->
+<script>
+    // User data array
+    const users = [
+        { "userName": "Passant", "phone": "01124961181", "email": "user@example.com", "password": "P@ssw0rd" }
+    ];
+
+    // Language translations
+    const translations = {
+        ar: {
+            pageTitle: "تسجيل الدخول والتسجيل",
+            login: "تسجيل الدخول",
+            register: "إنشاء حساب",
+            welcomeBack: "مرحباً بعودتك",
+            createAccount: "إنشاء حساب جديد",
+            username: "اسم المستخدم",
+            password: "كلمة المرور",
+            fullName: "الاسم الكامل",
+            phone: "رقم الهاتف",
+            email: "البريد الإلكتروني",
+            noAccount: "ليس لديك حساب؟",
+            haveAccount: "لديك حساب بالفعل؟",
+            signUp: "سجل الآن",
+            signIn: "تسجيل الدخول",
+            loginSuccess: "تم تسجيل الدخول بنجاح!",
+            registerSuccess: "تم التسجيل بنجاح!",
+            invalidCredentials: "اسم المستخدم أو كلمة المرور غير صحيحة!",
+            dir: "rtl"
+        },
+        en: {
+            pageTitle: "Login & Register",
+            login: "Login",
+            register: "Register",
+            welcomeBack: "Welcome Back",
+            createAccount: "Create an Account",
+            username: "Username",
+            password: "Password",
+            fullName: "Full Name",
+            phone: "Phone Number",
+            email: "Email Address",
+            noAccount: "Don't have an account?",
+            haveAccount: "Already have an account?",
+            signUp: "Sign Up",
+            signIn: "Sign In",
+            loginSuccess: "Login Successful!",
+            registerSuccess: "Registration Successful!",
+            invalidCredentials: "Invalid Username or Password!",
+            dir: "ltr"
+        }
+    };
+
+    // Success popup handler
+    function showPopup(messageKey) {
+        const lang = getCurrentLanguage();
+        const popup = document.getElementById("success-message");
+        popup.textContent = translations[lang][messageKey];
+        popup.classList.add("show");
+        
+        setTimeout(() => {
+            popup.classList.remove("show");
+        }, 3000);
+    }
+
+    // Form switching handler
+    function showForm(type) {
+        document.getElementById('login-form').classList.remove('active');
+        document.getElementById('register-form').classList.remove('active');
+        document.getElementById('login-tab').classList.remove('active');
+        document.getElementById('register-tab').classList.remove('active');
+
+        if (type === 'login') {
+            document.getElementById('login-form').classList.add('active');
+            document.getElementById('login-tab').classList.add('active');
+        } else {
+            document.getElementById('register-form').classList.add('active');
+            document.getElementById('register-tab').classList.add('active');
+        }
+    }
+
+    // Login handler
+    function handleLogin(event) {
+        event.preventDefault();
+        
+        const username = document.getElementById("login-username").value;
+        const password = document.getElementById("login-password").value;
+
+        // Your authentication logic here
+        const user = users.find(u => u.userName === username && u.password === password);
+
+        if (user) {
+            // Set login status
+            localStorage.setItem('isLoggedIn', 'true');
+            localStorage.setItem('loggedInUser', username);
+            localStorage.setItem('currentUser', JSON.stringify({
+                userName: username
+            }));
+            
+            console.log('Login successful');
+            
+            // Check if there's a redirect parameter
+            const urlParams = new URLSearchParams(window.location.search);
+            const redirect = urlParams.get('redirect');
+            
+            // Redirect based on parameter
+            if (redirect === 'join') {
+                window.location.href = 'join.html';
+            } else {
+                window.location.href = 'index.html';
+            }
+        } else {
+            alert("Invalid credentials!");
+        }
+    }
+
+    // Register handler
+    function handleRegister(event) {
+        event.preventDefault();
+        const username = document.getElementById("register-username").value;
+        const phone = document.getElementById("register-phone").value;
+        const email = document.getElementById("register-email").value;
+        const password = document.getElementById("register-password").value;
+
+        users.push({ userName: username, phone: phone, email: email, password: password });
+
+        showPopup('registerSuccess');
+        setTimeout(() => {
+            showForm('login');
+        }, 2000);
+    }
+
+    // Language handling
+    function getCurrentLanguage() {
+        return localStorage.getItem("selectedLanguage") || "ar";
+    }
+
+    function changeLanguage(lang) {
+        localStorage.setItem("selectedLanguage", lang);
+        document.documentElement.setAttribute("dir", translations[lang].dir);
+        document.documentElement.setAttribute("lang", lang);
+        updateUILanguage(lang);
+    }
+
+    function updateUILanguage(lang) {
+        // Update text content
+        document.querySelectorAll('[data-translate]').forEach(element => {
+            const key = element.getAttribute('data-translate');
+            if (translations[lang][key]) {
+                element.textContent = translations[lang][key];
+            }
+        });
+
+        // Update placeholders
+        document.querySelectorAll('[data-translate-placeholder]').forEach(element => {
+            const key = element.getAttribute('data-translate-placeholder');
+            if (translations[lang][key]) {
+                element.placeholder = translations[lang][key];
+            }
+        });
+
+        // Update document title
+        document.title = translations[lang].pageTitle;
+    }
+
+    // Initialize on page load
+    document.addEventListener("DOMContentLoaded", function() {
+        const savedLang = getCurrentLanguage();
+        changeLanguage(savedLang);
+
+        // Set up language switcher if it exists
+        const languageSwitcher = document.getElementById("languageSwitcher");
+        if (languageSwitcher) {
+            languageSwitcher.value = savedLang;
+            languageSwitcher.addEventListener("change", function() {
+                changeLanguage(this.value);
+            });
+        }
+
+        // Auto-select form based on URL parameter
+        const urlParams = new URLSearchParams(window.location.search);
+        const formType = urlParams.get('form') || 'login';
+        showForm(formType);
+    });
+
+    // Update the handleLogout function
+    function handleLogout() {
+        localStorage.removeItem('currentUser');
+        window.location.href = "auth.html";
+    }
+
+    // Add this function to check login status
+    function checkLoginStatus() {
+        const currentUser = JSON.parse(localStorage.getItem('currentUser'));
+        return currentUser && currentUser.isLoggedIn;
+    }
+
+    // Initialize with test user if needed
+    if (!users.length) {
+        users.push({
+            userName: "Passant",
+            phone: "01124961181",
+            email: "user@example.com",
+            password: "P@ssw0rd"
+        });
+    }
+</script>
+
+<!-- Vendor JS Files -->
+<script src="assets/vendor/aos/aos.js"></script>
+<script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+<script src="assets/vendor/glightbox/js/glightbox.min.js"></script>
+<script src="assets/vendor/isotope-layout/isotope.pkgd.min.js"></script>
+<script src="assets/vendor/swiper/swiper-bundle.min.js"></script>
+<script src="assets/vendor/typed.js/typed.min.js"></script>
+<script src="assets/vendor/php-email-form/validate.js"></script>
+
+<!-- Template Main JS File -->
+<script src="assets/js/main.js"></script>
+
+</body>
+</html>

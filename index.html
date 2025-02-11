@@ -6,7 +6,7 @@
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
   <title>جمعية التجارة الالكترونية </title>
-  <meta content="Open Science community Saudi Arabia (OSCSA) was established in line with Saudi Arabia’s Vision 2030, which focuses on installing values, enhancing knowledge and improving equal access to education. It aims to provide a place where newcomers and experienced peers interact, inspire each other to embed open science practices and values in their workflows and provide feedback on policies, infrastructures and support services."" name="description">
+  <meta content="Open Science community Saudi Arabia (OSCSA) was established in line with Saudi Arabia's Vision 2030, which focuses on installing values, enhancing knowledge and improving equal access to education. It aims to provide a place where newcomers and experienced peers interact, inspire each other to embed open science practices and values in their workflows and provide feedback on policies, infrastructures and support services."" name="description">
   <meta content="" name="keywords">
   <link href="assets/img/logo1.png" rel="icon">
 
@@ -69,7 +69,7 @@
         <h1 style="color: #443d41;">Together, we build the future of e-commerce in Saudi Arabia.</h1>
         <h2>We empower. <span class="typed" data-typed-items="Social and economic growth, financial and scientific benefits, opportunities for innovation and participation."></span></h2>
         <div class="actions">
-          <a href="https://form.jotform.com/221813832742353" class="btn-get-started">Join us</a>
+          <a href="#" class="btn-get-started" onclick="handleJoinClick(event)" data-translate="joinUs">Join us</a>
           <a href="https://zenodo.org/communities/1231231664/?page=1&size=20" class="btn-services">Our Activities and Work</a>
         </div>
       </div>
@@ -87,7 +87,20 @@
           <li><a class="nav-link scrollto" href="#services">Sponsors</a></li>
           <li><a class="nav-link scrollto" href="#testimonials">Memberships</a></li>
           <li><a class="nav-link scrollto" href="#contact">Contact Us</a></li>
+          <li><a class="nav-link" href="auth.html?form=login">Login</a></li>
+          <li><a class="nav-link" href="auth.html?form=register">Register</a></li>
           <li><a href="ar-index.html"><i class="bi bi-globe"></i>AR </a></li>
+          <!-- User Menu -->
+          <li id="userMenu" style="display: none;">
+            <div class="user-profile">
+                <i class="fas fa-user user-icon"></i>
+                <span id="userName"></span>
+                <button onclick="logout()" class="logout-btn">
+                    <i class="fas fa-sign-out-alt"></i>
+                    <span data-translate="logout">Logout</span>
+                </button>
+            </div>
+          </li>
         </ul>
         <i class="bi bi-list mobile-nav-toggle"></i>
       </nav><!-- .navbar -->
@@ -110,7 +123,7 @@
             <h3 class="section-title">Who We Are ?</h3>
             <div class="section-title-divider"></div>
             <p class="section-description">The E-Commerce Association, the first of its kind in the Kingdom, combines innovation, training, and support to achieve a significant leap in Saudi Arabia's digital market.
-            <a href="https://www.vision2030.gov.sa/">Saudi Arabia Vision 2030</a>It focuses on solidifying values, enhancing knowledge, and improving equal access to education. The aim is to provide a space where newcomers and experienced peers can interact, inspire each other, and promote open scientific practices and values in their workflow. It also seeks to enhance policies that support innovation and sustainability in the Kingdom’s e-commerce market.
+            <a href="https://www.vision2030.gov.sa/">Saudi Arabia Vision 2030</a>It focuses on solidifying values, enhancing knowledge, and improving equal access to education. The aim is to provide a space where newcomers and experienced peers can interact, inspire each other, and promote open scientific practices and values in their workflow. It also seeks to enhance policies that support innovation and sustainability in the Kingdom's e-commerce market.
             </p>
         </div>
       </div>
@@ -169,7 +182,7 @@
             <div class="section-title-divider"></div>
             <p class="section-description">Your support as a sponsor of the association will have a significant impact in realizing your social responsibility, supporting purposeful volunteer work, and contributing actively to the nonprofit sector in the Kingdom. It will also help create numerous job opportunities in the labor market for citizens, support entrepreneurs and talented individuals, and aid in fulfilling their aspirations, achieving their goals and dreams, nurturing their innovations, and advancing them. This will positively contribute to strengthening the e-commerce ecosystem in the Kingdom and supporting the national economy.
 
-              The association’s vision intersects with Saudi Vision 2030 in over 47% of its objectives. Sponsoring the association will support these goals, which cover various social, economic, and technical areas. It will also specifically contribute to enhancing the identity of the Saudi people by launching numerous innovative national projects in the e-commerce field. This emerging sector has had a significant impact on consumer behavior globally, with the COVID-19 crisis serving as a major testament to the strength of this market and its ability to withstand various risks. It has also redirected the focus of traditional trade toward it and represented inspiring success stories.
+              The association's vision intersects with Saudi Vision 2030 in over 47% of its objectives. Sponsoring the association will support these goals, which cover various social, economic, and technical areas. It will also specifically contribute to enhancing the identity of the Saudi people by launching numerous innovative national projects in the e-commerce field. This emerging sector has had a significant impact on consumer behavior globally, with the COVID-19 crisis serving as a major testament to the strength of this market and its ability to withstand various risks. It has also redirected the focus of traditional trade toward it and represented inspiring success stories.
               </p>
           </div>
         </div>
@@ -203,7 +216,7 @@
               Actual contribution to the diversification and development of the national economy.
               Direct access to the business sponsorship sector.
               Strengthening brand loyalty among relevant government and private entities, as well as future partners.
-              Investing in and adopting emerging tech business opportunities through the association’s business incubator.
+              Investing in and adopting emerging tech business opportunities through the association's business incubator.
               Accessing decision-makers in government entities and authorities through the association's official capacity.
               Representing sponsors' aspirations and participating in formulating recommendations and proposals to achieve those aspirations.
               Taking advantage of strategic partnership agreement opportunities with public and private sector partners.
@@ -726,6 +739,119 @@
 
   <!-- Template Main JS File -->
   <script src="assets/js/main.js"></script>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        checkLoginStatus();
+    });
+
+    function checkLoginStatus() {
+        try {
+            // Get elements
+            const guestLinks = document.getElementById('guestLinks');
+            const userMenu = document.getElementById('userMenu');
+            const userNameElement = document.getElementById('userName');
+            const loginBtn = document.querySelector('a[href="auth.html?form=login"]');
+            const registerBtn = document.querySelector('a[href="auth.html?form=register"]');
+
+            // Check if user is logged in
+            const isLoggedIn = localStorage.getItem('isLoggedIn') === 'true';
+            const userName = localStorage.getItem('loggedInUser');
+
+            console.log('Login status:', isLoggedIn);
+            console.log('Username:', userName);
+
+            if (isLoggedIn && userName) {
+                // User is logged in
+                console.log('User is logged in, showing user menu');
+                
+                // Hide login/register buttons
+                if (loginBtn) loginBtn.style.display = 'none';
+                if (registerBtn) registerBtn.style.display = 'none';
+                if (guestLinks) guestLinks.style.display = 'none';
+
+                // Show user menu with logout
+                if (userMenu) {
+                    userMenu.style.display = 'flex';
+                    if (userNameElement) {
+                        userNameElement.textContent = userName;
+                    }
+                }
+            } else {
+                // User is not logged in
+                console.log('User is not logged in, showing guest menu');
+                showGuestMenu();
+            }
+        } catch (error) {
+            console.log('Error in checkLoginStatus:', error.message);
+            showGuestMenu();
+        }
+    }
+
+    function showGuestMenu() {
+        const guestLinks = document.getElementById('guestLinks');
+        const userMenu = document.getElementById('userMenu');
+        const loginBtn = document.querySelector('a[href="auth.html?form=login"]');
+        const registerBtn = document.querySelector('a[href="auth.html?form=register"]');
+
+        // Show login/register buttons
+        if (loginBtn) loginBtn.style.display = 'inline-block';
+        if (registerBtn) registerBtn.style.display = 'inline-block';
+        if (guestLinks) guestLinks.style.display = 'flex';
+
+        // Hide user menu
+        if (userMenu) userMenu.style.display = 'none';
+    }
+
+    function logout() {
+        console.log('Logging out...');
+        // Clear all login-related data
+        localStorage.removeItem('isLoggedIn');
+        localStorage.removeItem('loggedInUser');
+        localStorage.removeItem('currentUser');
+        
+        // Reload page to update UI
+        window.location.reload();
+    }
+
+    // Language handling
+    const translations = {
+        ar: {
+            logout: "تسجيل الخروج",
+            welcome: "مرحباً",
+            joinUs: "انضم إلينا"
+        },
+        en: {
+            logout: "Logout",
+            welcome: "Welcome",
+            joinUs: "Join Us"
+        }
+    };
+
+    function setupLanguage() {
+        const lang = localStorage.getItem("selectedLanguage") || "ar";
+        document.documentElement.setAttribute("dir", lang === "ar" ? "rtl" : "ltr");
+        document.documentElement.setAttribute("lang", lang);
+
+        // Set up language switcher
+        const languageSwitcher = document.getElementById("languageSwitcher");
+        if (languageSwitcher) {
+            languageSwitcher.value = lang;
+            languageSwitcher.addEventListener("change", function() {
+                localStorage.setItem("selectedLanguage", this.value);
+                window.location.reload();
+            });
+        }
+
+        // Update translations
+        document.querySelectorAll('[data-translate]').forEach(element => {
+            const key = element.getAttribute('data-translate');
+            if (translations[lang][key]) {
+                element.textContent = translations[lang][key];
+            }
+        });
+    }
+  </script>
 
 </body>
 

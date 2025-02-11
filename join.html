@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Join Us - Membership Registration</title>
+    <link href="assets/css/style.css" rel="stylesheet" />
+</head>
+<body>
+
+<!-- Language Switcher - Outside form -->
+<div class="language-switcher-fixed">
+    <select id="languageSwitcher" class="form-select">
+        <option value="ar">العربية</option>
+        <option value="en">English</option>
+    </select>
+</div>
+
+<section class="auth-area">
+    <div class="container">
+        <div class="form-wrapper membership-form">
+            <form id="joinForm" class="auth-form active" onsubmit="return handleJoinSubmit(event)">
+                <h2 data-translate="joinTitle">Join Us - Membership Registration</h2>
+                
+                <!-- Full Name -->
+                <div class="form-group">
+                    <label data-translate="fullName">Full Name</label>
+                    <input type="text" id="fullName" required>
+                </div>
+
+                <!-- Membership Type -->
+                <div class="form-group">
+                    <label data-translate="membershipType">Membership Type</label>
+                    <select id="membershipType" onchange="handleMembershipChange()">
+                        <option value="honorary" data-translate="honoraryMember">Honorary Membership</option>
+                        <option value="regular" data-translate="regularMember">Regular Membership</option>
+                    </select>
+                </div>
+
+                <!-- Email -->
+                <div class="form-group">
+                    <label data-translate="email">Email</label>
+                    <input type="email" id="email" required>
+                </div>
+
+                <!-- Phone -->
+                <div class="form-group">
+                    <label data-translate="phone">Phone Number</label>
+                    <input type="tel" id="phone" required>
+                </div>
+
+                <!-- Work Field -->
+                <div class="form-group">
+                    <label data-translate="workField">Work Field or Interest</label>
+                    <input type="text" id="workField" required>
+                </div>
+
+                <!-- Document Upload - Only for Honorary -->
+                <div id="documentSection" class="form-group">
+                    <label data-translate="documents">Required Documents</label>
+                    <input type="file" id="documents" accept=".pdf,.doc,.docx">
+                    <br>
+                    <small class="help-text" data-translate="documentHelp">
+                        For Honorary Membership: Please attach proof of material or in-kind support
+                    </small>
+                </div>
+
+                <!-- Terms and Conditions -->
+                <div class="form-group">
+                    <div class="checkbox-group">
+                        <input type="checkbox" id="terms" required>
+                        <label for="terms" data-translate="terms">
+                            I agree to the Terms and Conditions
+                        </label>
+                    </div>
+                </div>
+
+                <button type="submit" class="btn-theme" data-translate="submit">Submit Application</button>
+            </form>
+        </div>
+    </div>
+</section>
+
+<script>
+    const translations = {
+        ar: {
+            joinTitle: "انضم إلينا - تسجيل العضوية",
+            fullName: "الاسم الكامل",
+            membershipType: "نوع العضوية المطلوبة",
+            honoraryMember: "عضوية شرفية",
+            regularMember: "عضوية عادية",
+            email: "البريد الإلكتروني",
+            phone: "رقم الهاتف",
+            workField: "مجال العمل أو الاهتمام",
+            documents: "المستندات المطلوبة",
+            documentHelp: "للعضوية الشرفية: يرجى إرفاق إثبات الدعم المادي أو العيني",
+            terms: "أوافق على الشروط والأحكام",
+            submit: "تقديم الطلب",
+            success: "تم تقديم طلبك بنجاح",
+            error: "حدث خطأ أثناء تقديم الطلب"
+        },
+        en: {
+            joinTitle: "Join Us - Membership Registration",
+            fullName: "Full Name",
+            membershipType: "Membership Type",
+            honoraryMember: "Honorary Membership",
+            regularMember: "Regular Membership",
+            email: "Email Address",
+            phone: "Phone Number",
+            workField: "Work Field or Interest",
+            documents: "Required Documents",
+            documentHelp: "For Honorary Membership: Please attach proof of material or in-kind support",
+            terms: "I agree to the Terms and Conditions",
+            submit: "Submit Application",
+            success: "Your application has been submitted successfully",
+            error: "An error occurred while submitting your application"
+        }
+    };
+
+    function handleMembershipChange() {
+        const membershipType = document.getElementById('membershipType').value;
+        const documentSection = document.getElementById('documentSection');
+        
+        if (membershipType === 'honorary') {
+            documentSection.style.display = 'block';
+        } else {
+            documentSection.style.display = 'none';
+        }
+    }
+
+    function handleJoinSubmit(event) {
+        event.preventDefault();
+        
+        // Get form data
+        const formData = {
+            fullName: document.getElementById('fullName').value,
+            membershipType: document.getElementById('membershipType').value,
+            email: document.getElementById('email').value,
+            phone: document.getElementById('phone').value,
+            workField: document.getElementById('workField').value,
+            termsAccepted: document.getElementById('terms').checked
+        };
+
+        // Here you would typically send this data to your server
+        console.log('Form submitted:', formData);
+
+        // Show success message
+        alert(translations[getCurrentLanguage()].success);
+        
+        // Redirect to home page
+        setTimeout(() => {
+            window.location.href = 'index.html';
+        }, 2000);
+
+        return false;
+    }
+
+    function getCurrentLanguage() {
+        return localStorage.getItem('selectedLanguage') || 'ar';
+    }
+
+    function updateLanguage(lang) {
+        document.documentElement.setAttribute('dir', lang === 'ar' ? 'rtl' : 'ltr');
+        document.documentElement.setAttribute('lang', lang);
+
+        document.querySelectorAll('[data-translate]').forEach(element => {
+            const key = element.getAttribute('data-translate');
+            if (translations[lang][key]) {
+                if (element.tagName === 'INPUT') {
+                    element.placeholder = translations[lang][key];
+                } else {
+                    element.textContent = translations[lang][key];
+                }
+            }
+        });
+    }
+
+    document.addEventListener('DOMContentLoaded', function() {
+        const lang = getCurrentLanguage();
+        updateLanguage(lang);
+        handleMembershipChange();
+
+        const languageSwitcher = document.getElementById('languageSwitcher');
+        if (languageSwitcher) {
+            languageSwitcher.value = lang;
+            languageSwitcher.addEventListener('change', function() {
+                localStorage.setItem('selectedLanguage', this.value);
+                updateLanguage(this.value);
+            });
+        }
+    });
+</script>
+
+</body>
+</html> 

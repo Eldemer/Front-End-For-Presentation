@@ -254,4 +254,36 @@
     aos_init();
   });
 
+  // Function to check login and redirect
+  function checkLoginAndRedirect(event) {
+    event.preventDefault();
+    
+    // Debug logs
+    console.log('Button clicked');
+    console.log('Login status:', localStorage.getItem('isLoggedIn'));
+
+    const isLoggedIn = localStorage.getItem('isLoggedIn') === 'true';
+    
+    if (!isLoggedIn) {
+        console.log('User not logged in, redirecting to login page');
+        // Redirect to login page with return parameter
+        window.location.href = 'auth.html?form=login&redirect=join';
+    } else {
+        console.log('User is logged in, redirecting to join page');
+        // Redirect directly to join page
+        window.location.href = 'join.html';
+    }
+  }
+
+  // Add event listener when document is loaded
+  document.addEventListener('DOMContentLoaded', function() {
+    console.log('Document loaded, adding click handler');
+    
+    // Find the join button
+    const joinButton = document.querySelector('.btn-get-started');
+    if (joinButton) {
+        joinButton.addEventListener('click', checkLoginAndRedirect);
+    }
+  });
+
 })()
