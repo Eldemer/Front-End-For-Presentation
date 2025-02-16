@@ -103,7 +103,6 @@ h6 {
 @media (min-width: 1024px) {
   #hero {
     background-attachment: fixed;
-
   }
 }
 
@@ -1032,7 +1031,6 @@ section {
   background: #ed3c0d;
   text-align: left;
   padding: 15px;
-  font-weight: 600;
 }
 
 #contact .php-email-form .error-message br + br {
@@ -1209,3 +1207,907 @@ section {
   flex-wrap: wrap;
 }
 
+.auth-area {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background: linear-gradient(135deg, #f0f5ff, #ffffff);
+}
+
+.form-wrapper {
+  background: #fff;
+  padding: 30px;
+  border-radius: 12px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  width: 350px;
+  text-align: center;
+}
+
+/* Form Header (Tabs) */
+.form-header {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+
+.auth-tab {
+  flex: 1;
+  padding: 10px;
+  font-size: 16px;
+  border: none;
+  background: #eee;
+  cursor: pointer;
+  border-radius: 6px;
+  transition: all 0.3s ease-in-out;
+}
+
+.auth-tab.active {
+  background: #03c4eb;
+  color: white;
+}
+
+/* Form Styling */
+.auth-form {
+  display: none;
+  animation: fadeIn 0.5s ease-in-out;
+}
+
+.auth-form.active {
+  display: block;
+}
+
+.auth-form h2 {
+  font-size: 22px;
+  margin-bottom: 20px;
+  color: #333;
+}
+
+.form-group {
+  margin-bottom: 20px;
+  position: relative;
+}
+
+/* Form Input Fields Alignment */
+.form-group input,
+.form-group select {
+    width: 90%;
+    padding: 12px 15px;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    font-size: 14px;
+    transition: all 0.3s ease;
+    text-align: left; /* Default for LTR */
+}
+
+
+
+
+/* RTL Specific Styles */
+[dir="rtl"] .form-group input{
+    text-align: right;
+    direction: rtl;
+}
+
+[dir="rtl"] .form-group label {
+    text-align: right;
+    display: block;
+    margin-bottom: 8px;
+}
+
+/* Label Styles */
+.form-group label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 500;
+    color: #333;
+    font-size: 14px;
+}
+
+/* Phone Field Container */
+.phone-field-container {
+    position: relative;
+    direction: ltr; /* Always LTR for phone container */
+}
+
+[dir="rtl"] .phone-field-container {
+    direction: ltr; /* Maintain LTR even in RTL context */
+}
+
+/* Button Styling */
+.btn-theme {
+  width: 100%;
+  padding: 12px;
+  background: #03c4eb;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+}
+
+.btn-theme:hover {
+  background: #02b1d4;
+}
+
+/* Toggle Link */
+.toggle-link {
+  margin-top: 15px;
+  font-size: 14px;
+}
+
+.toggle-link a {
+  color: #03c4eb;
+  text-decoration: none;
+}
+
+.toggle-link a:hover {
+  text-decoration: underline;
+}
+
+/* Fade In Animation */
+@keyframes fadeIn {
+  from { 
+    opacity: 0; 
+    transform: translateY(-10px); 
+  }
+  to { 
+    opacity: 1; 
+    transform: translateY(0); 
+  }
+}
+
+/* RTL Support for Auth Forms */
+[dir="rtl"] .form-wrapper {
+  text-align: right;
+}
+
+[dir="rtl"] .auth-form {
+  direction: rtl;
+}
+
+/* Mobile Responsive */
+@media (max-width: 768px) {
+  .form-wrapper {
+    width: 90%;
+    margin: 0 15px;
+  }
+  
+  .auth-form h2 {
+    font-size: 20px;
+  }
+  
+  .form-group input {
+    font-size: 16px; /* Better for mobile input */
+  }
+}
+
+/* Active Form State */
+.auth-form {
+  display: none;
+}
+
+.auth-form.active {
+  display: block;
+}
+
+/* Error Messages */
+.error-message {
+  color: #dc3545;
+  font-size: 14px;
+  margin-top: 5px;
+  display: none;
+}
+
+.error-message.show {
+  display: block;
+}
+
+.slider-content-area .row {
+  flex-direction: row-reverse; /* English: image on right, text on left */
+  text-align: right;
+  display: flex;
+
+
+  
+}
+
+/* Default Arabic Layout (Text on Right, Image on Left) */
+.dynamic-layout {
+  display: flex;
+  flex-direction: row-reverse;
+  text-align: right;
+}
+
+/* When switched to English (Text on Left, Image on Right) */
+.dynamic-layout.ltr {
+  flex-direction: row;
+  text-align: left;
+}
+
+/* Center Image */
+.dynamic-layout .thumb img {
+  max-width: 80%;
+  margin: 0 auto;
+  display: block;
+}
+
+/* Buttons Consistency */
+.btn-wrp {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.btn-wrp a {
+  min-width: 180px; /* Ensure buttons have a consistent width */
+  margin: 5px;
+}
+/* Ensure content aligns correctly in both Arabic & English */
+.dynamic-layout {
+  display: flex;
+  flex-direction: row-reverse; /* Default: Arabic (RTL) */
+  text-align: right;
+  align-items: center;
+}
+
+/* Switch to LTR when English is selected */
+.dynamic-layout.ltr {
+  flex-direction: row;
+  text-align: left;
+}
+
+/* Section Title */
+.section-title {
+    text-align: center;
+    margin-bottom: 50px;
+    position: relative;
+}
+
+.section-title .subtitle {
+    color: var(--subtitle-color);
+    font-size: 18px;
+    font-weight: 600;
+    margin-bottom: 15px;
+    display: block;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.section-title .title {
+    color: var(--title-color);
+    font-size: 36px;
+    font-weight: bold;
+    margin-bottom: 20px;
+    position: relative;
+    padding-bottom: 20px;
+}
+
+.section-title .title:after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 80px;
+    height: 3px;
+    background: linear-gradient(to right, var(--primary-color), var(--primary-light));
+    border-radius: 2px;
+}
+
+.section-title p {
+    color: #6c757d;
+    font-size: 16px;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+/* RTL Support */
+[dir="rtl"] .section-title .title:after {
+    right: 50%;
+    left: auto;
+    transform: translateX(50%);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .section-title .subtitle {
+        font-size: 16px;
+    }
+    
+    .section-title .title {
+        font-size: 28px;
+    }
+    
+    .section-title p {
+        font-size: 14px;
+    }
+}
+
+/* Fixed Language Switcher Styles */
+.language-switcher-fixed {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    z-index: 1000;
+    background: white;
+    padding: 8px;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+}
+
+.language-switcher-fixed select {
+    padding: 8px 32px 8px 12px;
+    border: 2px solid #03c4eb;
+    border-radius: 6px;
+    background: white url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%2303c4eb' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E") no-repeat;
+    background-position: right 8px center;
+    color: #03c4eb;
+    font-weight: 500;
+    cursor: pointer;
+    appearance: none;
+    -webkit-appearance: none;
+    min-width: 120px;
+}
+
+.language-switcher-fixed select:hover {
+    background-color: #03c4eb;
+    color: white;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+}
+
+/* RTL Support for Fixed Language Switcher */
+[dir="rtl"] .language-switcher-fixed {
+    left: 20px;
+    right: auto;
+}
+
+[dir="rtl"] .language-switcher-fixed select {
+    padding: 8px 12px 8px 32px;
+    background-position: left 8px center;
+    text-align: right;
+    direction: rtl;
+}
+
+/* Remove old language switcher styles from form */
+.membership-form .language-switcher {
+    display: none;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .language-switcher-fixed {
+        position: absolute;
+        top: 10px;
+        right: 10px;
+    }
+
+    [dir="rtl"] .language-switcher-fixed {
+        left: 10px;
+        right: auto;
+    }
+
+    .form-group input {
+        font-size: 16px; /* Better for mobile input */
+    }
+}
+
+/* User Welcome Styles */
+.user-welcome {
+    position: fixed;
+    top: 20px;
+    right: 120px;
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    background: white;
+    padding: 8px 15px;
+    border-radius: 6px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+}
+
+[dir="rtl"] .user-welcome {
+    left: 120px;
+    right: auto;
+}
+
+#userNameDisplay {
+    color: #03c4eb;
+    font-weight: 600;
+}
+
+.logout-btn {
+    background: #ff3e3e;
+    color: white;
+    border: none;
+    padding: 6px 12px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: all 0.3s ease;
+}
+
+.logout-btn:hover {
+    background: #e63636;
+    transform: translateY(-1px);
+}
+
+/* Make sure the welcome message is visible */
+.user-welcome {
+    display: flex !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .user-welcome {
+        position: relative;
+        top: 0;
+        right: 0;
+        left: 0;
+        justify-content: center;
+        margin: 10px auto;
+        width: fit-content;
+    }
+}
+
+/* User Profile Styles */
+.user-profile {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 5px 15px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 50px;
+    margin-left: 15px;
+}
+
+.user-avatar {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+#userName {
+    color: #fff;
+    font-weight: 500;
+    margin-right: 10px;
+}
+
+.logout-btn {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    background: transparent;
+    border: none;
+    color: #fff;
+    cursor: pointer;
+    padding: 5px 10px;
+    border-radius: 20px;
+    transition: all 0.3s ease;
+}
+
+.logout-btn:hover {
+    background: rgba(255, 255, 255, 0.1);
+}
+
+.logout-icon {
+    width: 16px;
+    height: 16px;
+    opacity: 0.8;
+}
+
+/* Guest Links Styles */
+#guestLinks {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+
+#guestLinks .nav-link {
+    color: #fff;
+    text-decoration: none;
+    padding: 5px 15px;
+    border-radius: 20px;
+    transition: all 0.3s ease;
+}
+
+#guestLinks .getstarted {
+    background: #5846f9;
+    color: #fff;
+    padding: 8px 20px;
+    border-radius: 20px;
+    transition: all 0.3s ease;
+}
+
+#guestLinks .getstarted:hover {
+    background: #7b27d8;
+    transform: translateY(-2px);
+}
+
+/* Enhanced Membership Form Styles */
+.membership-form {
+    max-width: 800px !important;
+    background: white;
+    border-radius: 20px;
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.1);
+    padding: 40px 50px;
+    margin: 40px auto;
+}
+
+/* Form Header */
+.membership-form h2 {
+    color: #03c4eb;
+    text-align: center;
+    margin-bottom: 35px;
+    font-size: 28px;
+    font-weight: 600;
+    position: relative;
+    padding-bottom: 15px;
+}
+
+.membership-form h2:after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 80px;
+    height: 4px;
+    background: linear-gradient(to right, #03c4eb, #02b1d4);
+    border-radius: 2px;
+}
+
+/* Form Groups */
+.membership-form .form-group {
+    margin-bottom: 25px;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+/* Labels */
+.membership-form label {
+    display: block;
+    margin-bottom: 10px;
+    font-weight: 500;
+    color: #2c3e50;
+    font-size: 16px;
+    transition: all 0.3s ease;
+    text-align: left;
+}
+
+/* Input Fields */
+.membership-form input:not([type="checkbox"]),
+.membership-form select {
+    width: 80% !important;
+    padding: 10px 15px;
+    border: 2px solid #e0e0e0;
+    border-radius: 10px;
+    font-size: 16px;
+    transition: all 0.3s ease;
+    background-color: #f8f9fa;
+    margin-left: 0;
+    margin-right: auto;
+}
+
+/* Select Styling */
+.membership-form select {
+    appearance: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%23333' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: left 15px center;
+    padding-right: 15px;
+    padding-left: 40px;
+    width: 90% !important;
+    cursor: pointer;
+}
+
+/* File Upload */
+.membership-form input[type="file"] {
+    padding: 12px;
+    background: #f8f9fa;
+    border: 2px dashed #e0e0e0;
+    cursor: pointer;
+}
+
+/* Checkbox Group */
+.membership-form .checkbox-group {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-top: 30px;
+    margin-bottom: 30px;
+    padding: 15px;
+    background: #f8f9fa;
+    border-radius: 10px;
+    border: 1px solid #e0e0e0;
+}
+
+.membership-form .checkbox-group input[type="checkbox"] {
+    width: 20px;
+    height: 20px;
+    margin: 0;
+}
+
+.membership-form .checkbox-group label {
+    margin: 0;
+    font-size: 15px;
+    color: #555;
+}
+
+/* Help Text */
+.membership-form .help-text {
+    margin-left: 0;
+    width: 70%;
+    align-self: flex-end;
+}
+
+/* Submit Button */
+.membership-form .btn-theme {
+    width: 70%;
+    margin-left: 0;
+    margin-right: auto;
+}
+
+.membership-form .btn-theme:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(3, 196, 235, 0.2);
+}
+
+/* Focus States */
+.membership-form input:focus,
+.membership-form select:focus {
+    border-color: #03c4eb;
+    background-color: #fff;
+    box-shadow: 0 0 0 4px rgba(3, 196, 235, 0.1);
+}
+
+/* RTL Specific Styles */
+
+[dir="rtl"] .membership-form input:not([type="checkbox"]),
+[dir="rtl"] .membership-form select,
+[dir="rtl"] .membership-form .btn-theme {
+    margin-right: auto;
+    margin-left: 0;
+}
+
+[dir="rtl"] .membership-form select {
+    background-position: right 15px center;
+    padding-left: 15px;
+    padding-right: 40px;
+}
+
+[dir="rtl"] .membership-form .help-text {
+    margin-right: 0;
+    align-self: flex-end;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .membership-form {
+        padding: 25px;
+    }
+
+    .membership-form input:not([type="checkbox"]),
+    .membership-form select,
+    .membership-form .btn-theme,
+    .membership-form .help-text {
+        width: 100% !important;
+        margin-left: 0;
+        margin-right: 0;
+    }
+
+   
+
+    
+}
+
+
+
+#documentSection label {
+    display: block;
+
+    font-weight: 500;
+    color: #2c3e50;
+}
+
+#documentSection input[type="file"] {
+    width: 70% !important;
+    padding: 12px 15px;
+    background: #f8f9fa;
+    border: 2px dashed #e0e0e0;
+    border-radius: 10px;
+    cursor: pointer;
+    margin-left: 0;
+    margin-right: auto;
+}
+
+#documentSection .help-text {
+    display: block;
+    font-size: 13px;
+    color: #666;
+    line-height: 1.5;
+    text-align: center;
+    margin: auto;
+    margin-bottom: 0px;
+}
+
+/* RTL Document Section */
+[dir="rtl"] #documentSection label {
+    text-align: right;
+}
+
+[dir="rtl"] #documentSection input[type="file"] {
+    margin-left: auto;
+    margin-right: 0;
+    margin-bottom: 0px;
+    text-align: right;
+}
+
+[dir="rtl"] #documentSection .help-text {
+    margin-left: auto;
+    margin-right: 0;
+    margin: auto;
+    margin-bottom: 0px;
+    text-align: center;
+    font-family: 'IBM Plex Sans Arabic', 'Noto Kufi Arabic', sans-serif;
+}
+
+/* Document Section Hover States */
+#documentSection input[type="file"]:hover {
+    border-color: #03c4eb;
+    background-color: #f0f9fb;
+}
+
+/* Document Section Mobile */
+@media (max-width: 768px) {
+    #documentSection input[type="file"],
+    #documentSection .help-text {
+        width: 100% !important;
+        margin-left: 0;
+        margin-right: 0;
+        margin-bottom: 0px;
+    }
+}
+
+/* Document Help Text Specific Styling */
+.document-help-text {
+    display: block;
+    width: 70%;
+    margin-top: 10px;
+    padding: 12px 15px;
+    background: #f0f9fb;
+    border-left: 4px solid #03c4eb;
+    border-radius: 6px;
+    font-size: 14px;
+    line-height: 1.5;
+    color: #2c3e50;
+    margin-left: 0;
+    margin-right: auto;
+    position: relative;
+}
+
+/* English Version */
+[dir="ltr"] .document-help-text {
+    padding-left: 35px;
+    text-align: left;
+}
+
+[dir="ltr"] .document-help-text:before {
+    content: "Note:";
+    font-weight: 600;
+    color: #03c4eb;
+    margin-right: 5px;
+}
+
+/* Arabic Version */
+[dir="rtl"] .document-help-text {
+    padding-right: 35px;
+    text-align: right;
+    border-left: none;
+    border-right: 4px solid #03c4eb;
+    font-family: 'IBM Plex Sans Arabic', 'Noto Kufi Arabic', sans-serif;
+}
+
+[dir="rtl"] .document-help-text:before {
+    content: "ملاحظة:";
+    font-weight: 600;
+    color: #03c4eb;
+    margin-left: 5px;
+}
+
+/* Icon for both languages */
+.document-help-text:after {
+    content: '';
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%2303c4eb'%3E%3Cpath d='M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z'/%3E%3C/svg%3E");
+    background-size: contain;
+    top: 12px;
+}
+
+[dir="ltr"] .document-help-text:after {
+    left: 10px;
+}
+
+[dir="rtl"] .document-help-text:after {
+    right: 10px;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .document-help-text {
+        width: 100% !important;
+        margin: 10px 0;
+    }
+}
+
+/* Checkbox Group Styling */
+.checkbox-group {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin: 20px 0;
+    padding: 10px;
+    background: #f8f9fa;
+    border-radius: 6px;
+    border: 1px solid #e0e0e0;
+}
+
+/* Checkbox Input */
+.checkbox-group input[type="checkbox"] {
+    width: 18px;
+    height: 18px;
+    margin: 0;
+    cursor: pointer;
+    accent-color: #03c4eb;
+}
+
+/* Checkbox Label */
+.checkbox-group label {
+    margin: 0 !important;
+    font-size: 14px;
+    color: #333;
+    cursor: pointer;
+    flex: 1;
+    line-height: 1.4;
+}
+
+/* RTL Checkbox Group */
+[dir="rtl"] .checkbox-group {
+    flex-direction: row-reverse;
+}
+
+[dir="rtl"] .checkbox-group label {
+    text-align: right;
+}
+
+/* Hover States */
+.checkbox-group:hover {
+    background: #f0f9fb;
+    border-color: #03c4eb;
+}
+
+/* Focus States */
+.checkbox-group input[type="checkbox"]:focus {
+    outline: 2px solid #03c4eb;
+    outline-offset: 2px;
+}
+
+/* Mobile Responsive */
+@media (max-width: 768px) {
+    .checkbox-group {
+        padding: 8px;
+    }
+    
+    .checkbox-group label {
+        font-size: 13px;
+    }
+}
