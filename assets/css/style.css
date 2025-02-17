@@ -93,63 +93,60 @@ h6 {
 # Welcome
 --------------------------------------------------------------*/
 #hero {
-  display: flex; /* جعل العنصر مرنًا لمحاذاة المحتوى بشكل أفضل */
-  align-items: center;
-  justify-content: center;
+  display: table;
   width: 100%;
-  min-width: 300px;
+  min-width: 300px; /* الحد الأدنى لعرض العنصر */
   height: 100vh;
-  background: url(../img/landing/bg2.png) no-repeat center center;
+  background: url(../img/landing/bg2.png) top center no-repeat;
   background-size: cover;
-  background-attachment: scroll; /* تعطيل البارالاكس على كل الأجهزة */
-  position: relative;
+  background-attachment: fixed;
 }
 
-/* 🔹 للأجهزة الكبيرة (ديسكتوب عريض) */
+/* 🔹 للأجهزة الكبيرة (شاشات فوق 1200px مثل الديسكتوب العريض) */
 @media (min-width: 1200px) {
   #hero {
-    height: 100vh;
+    height: 100vh; /* يأخذ كامل ارتفاع الشاشة */
     background-size: cover;
+    background-position: center center;
   }
 }
 
-/* 🔹 للأجهزة المتوسطة (تابلت) */
+/* 🔹 للأجهزة المتوسطة (التابلت والشاشات بين 992px و 1199px) */
 @media (max-width: 1199px) {
   #hero {
     height: 90vh;
     background-size: cover;
+    background-position: center;
   }
 }
 
-/* 🔹 للأجهزة الصغيرة (هواتف كبيرة بين 768px و 991px) */
+/* 🔹 للأجهزة الصغيرة (الموبايلات الكبيرة بين 768px و 991px) */
 @media (max-width: 991px) {
   #hero {
-    height: auto; /* بدلاً من max-content */
-    min-height: 80vh; /* ضمان ملء جزء كبير من الشاشة */
-    background-size: contain; /* تجنب قص الصورة */
+    height: 80vh;
+    background-size: contain; /* جعل الصورة تظهر بالكامل */
+    background-position: center;
+    background-attachment: scroll; /* تعطيل البارالاكس */
   }
 }
 
-/* 🔹 للموبايلات العادية (أقل من 768px) */
+/* 🔹 للموبايلات الصغيرة (أقل من 768px) */
 @media (max-width: 767px) {
   #hero {
-    height: auto;
-    min-height: 70vh;
+    height: 35vh;
     background-size: contain;
     background-position: center;
   }
 }
 
-/* 🔹 للموبايلات الصغيرة جدًا (أقل من 480px - مثل iPhone SE) */
+/* 🔹 للموبايلات الأصغر (أقل من 480px - مثل iPhone SE) */
 @media (max-width: 480px) {
   #hero {
-    height: auto;
-    min-height: 60vh;
+    height: 35vh;
     background-size: contain;
     background-position: center;
   }
 }
-
 
 
 
