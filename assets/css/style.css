@@ -142,7 +142,7 @@ h6 {
 /* 🔹 للموبايلات الأصغر (أقل من 480px - مثل iPhone SE) */
 @media (max-width: 480px) {
   #hero {
-    height: 60vh;
+    height: 35vh;
     background-size: contain;
     background-position: center;
   }
