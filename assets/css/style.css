@@ -114,7 +114,7 @@ h6 {
 /* 🔹 للأجهزة المتوسطة (التابلت والشاشات بين 992px و 1199px) */
 @media (max-width: 1199px) {
   #hero {
-    height: 35vh;
+    height: 100vh;
     background-size: cover;
     background-position: center;
   }
@@ -123,7 +123,7 @@ h6 {
 /* 🔹 للأجهزة الصغيرة (الموبايلات الكبيرة بين 768px و 991px) */
 @media (max-width: 991px) {
   #hero {
-    height: 40h;
+    height: 100h;
     background-size: contain; /* جعل الصورة تظهر بالكامل */
     background-position: center;
     background-attachment: scroll; /* تعطيل البارالاكس */
@@ -133,7 +133,7 @@ h6 {
 /* 🔹 للموبايلات الصغيرة (أقل من 768px) */
 @media (max-width: 767px) {
   #hero {
-    height: 35vh;
+    height: 100vh;
     background-size: contain;
     background-position: center;
   }
@@ -142,7 +142,7 @@ h6 {
 /* 🔹 للموبايلات الأصغر (أقل من 480px - مثل iPhone SE) */
 @media (max-width: 480px) {
   #hero {
-    height: 35vh;
+    height: 100vh;
     background-size: contain;
     background-position: center;
   }
