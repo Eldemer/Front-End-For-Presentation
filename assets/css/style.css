@@ -95,62 +95,16 @@ h6 {
 #hero {
   display: table;
   width: 100%;
-  min-width: 300px; /* الحد الأدنى لعرض العنصر */
   height: 100vh;
-  background: url(../img/landing/bg2.png) top center no-repeat;
+  background: url(../img/landing/bg2.png) top center;
   background-size: cover;
-  background-attachment: fixed;
 }
 
-/* 🔹 للأجهزة الكبيرة (شاشات فوق 1200px مثل الديسكتوب العريض) */
-@media (min-width: 1200px) {
+@media (min-width: 1024px) {
   #hero {
-    height: 100vh; /* يأخذ كامل ارتفاع الشاشة */
-    background-size: cover;
-    background-position: center center;
+    background-attachment: fixed;
   }
 }
-
-/* 🔹 للأجهزة المتوسطة (التابلت والشاشات بين 992px و 1199px) */
-@media (max-width: 1199px) {
-  #hero {
-    height: 90vh;
-    background-size: cover;
-    background-position: center;
-  }
-}
-
-/* 🔹 للأجهزة الصغيرة (الموبايلات الكبيرة بين 768px و 991px) */
-@media (max-width: 991px) {
-  #hero {
-    height: 35vh;
-    background-size: contain; /* جعل الصورة تظهر بالكامل */
-    background-position: center;
-    background-attachment: scroll; /* تعطيل البارالاكس */
-  }
-}
-
-/* 🔹 للموبايلات الصغيرة (أقل من 768px) */
-@media (max-width: 767px) {
-  #hero {
-    height: 35vh;
-    background-size: contain;
-    background-position: center;
-  }
-}
-
-/* 🔹 للموبايلات الأصغر (أقل من 480px - مثل iPhone SE) */
-@media (max-width: 480px) {
-  #hero {
-    height: 35vh;
-    background-size: contain;
-    background-position: center;
-  }
-}
-
-
-
-
 
 #hero .hero-logo {
   margin: 20px;
