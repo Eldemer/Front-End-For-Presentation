@@ -133,7 +133,7 @@ h6 {
 /* 🔹 للموبايلات الصغيرة (أقل من 768px) */
 @media (max-width: 767px) {
   #hero {
-    height: 70vh;
+    height: 35vh;
     background-size: contain;
     background-position: center;
   }
