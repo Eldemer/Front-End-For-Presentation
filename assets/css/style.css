@@ -128,8 +128,8 @@ h6 {
 
 @media (max-width: 600px) {
   #hero h1 {
-    font-size: 20px;    
-    line-height: 20px;
+    font-size: 15px; 
+    padding: 50px 170px 0 0; 
   }
   #hero {
     display: table;
@@ -140,8 +140,8 @@ h6 {
   }
   #hero h2 {
     font-size: 20px;
-    line-height: 26px;
-    margin-bottom: 15px;
+    line-height: 30px;
+    padding-right: 150px;
   }
 
   #hero h2 .rotating {
@@ -172,7 +172,7 @@ h6 {
 }
 
 #hero h1 {
-  margin: 30px 0 10px 0;
+  margin: 10px 0 10px 0;
   font-weight: 700;
   line-height: 48px;
   font-family: "Noto Kufi Arabic", sans-serif;
@@ -183,7 +183,7 @@ h6 {
 
 #hero h2 {
   color: #ccc;
-  margin-bottom: 50px;
+  margin-bottom: 10px;
   font-family: "Noto Kufi Arabic", sans-serif;
 }
 
